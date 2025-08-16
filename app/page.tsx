@@ -19,6 +19,7 @@ import {
     Star,
     Wrench,
 } from "lucide-react";
+import Image from "next/image";
 import React, { useEffect, useMemo, useState } from "react";
 
 /**
@@ -128,9 +129,9 @@ const PROJECTS: {
 
 const CONTACT = {
     email: "mailto:your.email@example.com", // TODO: replace with your email
-    phone: "tel:+8801XXXXXXXXX", // TODO: replace with your number
-    github: "#", // TODO: replace with your GitHub
-    linkedin: "#", // TODO: replace with your LinkedIn
+    phone: "tel:+8801700940689", // TODO: replace with your number
+    github: "https://github.com/MahdiHDev", // TODO: replace with your GitHub
+    linkedin: "https://www.linkedin.com/in/mahdi-hussain-dev/", // TODO: replace with your LinkedIn
     resume: "/Mahdi_Hussain_Resume.pdf", // TODO: place your resume file in public/
 };
 
@@ -261,37 +262,83 @@ const Nav = () => {
     );
 };
 
-const Hero = () => (
-    <Section className="pt-20 md:pt-28">
-        <div className="grid md:grid-cols-12 gap-8 items-center">
-            <div className="md:col-span-7">
+// const CONTACT = {
+//     resume: "/files/Mahdi_Hussain_CV.pdf",
+//     email: "mailto:mahdi@example.com",
+// };
+// const TAGS = ["React", "Next.js", "Node.js", "MongoDB", "Redux", "RTK Query"];
+
+// // Simple Chip Component
+// const Chip = ({ children }: { children: React.ReactNode }) => (
+//     <span className="px-3 py-1 text-sm rounded-full bg-white/10 dark:bg-black/10 text-white/80 hover:scale-105 transition">
+//         {children}
+//     </span>
+// );
+
+// // Simple GlassCard Wrapper
+// const GlassCard = ({ children }: { children: React.ReactNode }) => (
+//     <div className="rounded-2xl bg-white/10 dark:bg-black/20 p-6 shadow-lg backdrop-blur-md border border-white/10">
+//         {children}
+//     </div>
+// );
+
+function Hero() {
+    return (
+        <section className="min-h-screen flex flex-col md:flex-row items-center justify-center gap-12 px-6 md:px-16 text-white container mx-auto py-12 md:py-20">
+            {/* Profile Image with Glow */}
+            <motion.div
+                initial={{ opacity: 0, y: 40 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+                className="relative flex-shrink-0"
+            >
+                <div className="relative w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden shadow-2xl border-4 border-white">
+                    <Image
+                        src="/images/mahdi.jpg"
+                        alt="Mahdi Hussain"
+                        fill
+                        className="object-cover"
+                        priority
+                    />
+                </div>
+                <div className="absolute inset-0 rounded-full p-[4px] animate-spin-slow bg-gradient-to-r from-sky-400 via-purple-500 to-pink-500 -z-10 blur-lg"></div>
+            </motion.div>
+
+            {/* Intro + Actions */}
+            <div className="flex-1 text-center md:text-left space-y-6">
                 <motion.h1
-                    initial={{ opacity: 0, y: 12 }}
+                    initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6 }}
-                    className="text-4xl md:text-6xl font-bold tracking-tight leading-[1.1]"
+                    className="text-4xl md:text-6xl font-extrabold leading-tight"
                 >
-                    Building elegant, fast{" "}
+                    Hi, I’m <span className="text-sky-400">Mahdi Hussain</span>{" "}
+                    <br />I build{" "}
                     <span className="bg-gradient-to-r from-indigo-500 via-sky-400 to-amber-400 bg-clip-text text-transparent">
-                        MERN
+                        MERN Stack
                     </span>{" "}
-                    apps.
+                    apps 🚀
                 </motion.h1>
+
                 <motion.p
-                    initial={{ opacity: 0, y: 12 }}
+                    initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.1 }}
-                    className="mt-4 text-base md:text-lg text-black/70 dark:text-white/70"
+                    className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto md:mx-0"
                 >
-                    I’m <strong>Mahdi Hussain</strong> — a MERN stack developer
+                    A passionate{" "}
+                    <span className="font-semibold">MERN Stack Developer</span>{" "}
                     focused on modern UX, resilient APIs, and clean, scalable
-                    state management with Redux & RTK Query.
+                    state management with{" "}
+                    <span className="text-sky-400">Redux & RTK Query</span>.
                 </motion.p>
+
+                {/* Buttons */}
                 <motion.div
-                    initial={{ opacity: 0, y: 12 }}
+                    initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.2 }}
-                    className="mt-6 flex flex-wrap items-center gap-3"
+                    className="flex flex-wrap justify-center md:justify-start gap-4"
                 >
                     <a
                         href={CONTACT.resume}
@@ -301,64 +348,65 @@ const Hero = () => (
                     </a>
                     <a
                         href={CONTACT.email}
-                        className="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-black/10 dark:border-white/10 hover:bg-black/5 dark:hover:bg-white/10 transition"
+                        className="inline-flex items-center gap-2 px-5 py-3 rounded-xl border border-gray-400/30 hover:bg-white/10 font-medium transition"
                     >
                         <Mail className="w-4 h-4" /> Email Me
                     </a>
                     <a
                         href="#projects"
-                        className="inline-flex items-center gap-2 px-4 py-2 rounded-xl hover:translate-x-0.5 transition"
+                        className="inline-flex items-center gap-2 px-5 py-3 rounded-xl hover:translate-x-1 transition"
                     >
                         View Projects <ChevronRight className="w-4 h-4" />
                     </a>
                 </motion.div>
-                <div className="mt-8 flex flex-wrap gap-2">
-                    {TAGS.map((t) => (
-                        <Chip key={t}>{t}</Chip>
+
+                {/* Tags */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.3 }}
+                    className="flex flex-wrap gap-3 justify-center md:justify-start mt-6"
+                >
+                    {TAGS.map((tag) => (
+                        <span
+                            key={tag}
+                            className="px-3 py-1 rounded-full bg-white/10 border border-white/20 text-sm text-gray-200"
+                        >
+                            {tag}
+                        </span>
                     ))}
-                </div>
-            </div>
-            <div className="md:col-span-5">
-                <GlassCard>
-                    <div className="flex items-center gap-4">
-                        <div className="h-16 w-16 rounded-2xl bg-gradient-to-br from-indigo-500 via-sky-400 to-amber-300" />
-                        <div>
-                            <p className="text-sm text-black/60 dark:text-white/60">
-                                Currently
-                            </p>
-                            <p className="font-semibold">
-                                Building modern commerce & content tools
-                            </p>
-                        </div>
+                </motion.div>
+
+                {/* Stats Card */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.4 }}
+                    className="mt-8 bg-white/5 backdrop-blur-md rounded-2xl p-4 md:p-6 grid grid-cols-3 gap-6 text-center shadow-xl w-full max-w-3xl"
+                >
+                    <div>
+                        <p className="text-2xl md:text-3xl font-bold">5+</p>
+                        <p className="text-xs text-gray-400 uppercase">
+                            Years Coding
+                        </p>
                     </div>
-                    <div className="mt-6 grid grid-cols-3 gap-4 text-center">
-                        <div>
-                            <p className="text-3xl font-bold">5+</p>
-                            <p className="text-xs uppercase tracking-wider text-black/60 dark:text-white/60">
-                                Years coding*
-                            </p>
-                        </div>
-                        <div>
-                            <p className="text-3xl font-bold">10+</p>
-                            <p className="text-xs uppercase tracking-wider text-black/60 dark:text-white/60">
-                                Major modules
-                            </p>
-                        </div>
-                        <div>
-                            <p className="text-3xl font-bold">∞</p>
-                            <p className="text-xs uppercase tracking-wider text-black/60 dark:text-white/60">
-                                Curiosity
-                            </p>
-                        </div>
+                    <div>
+                        <p className="text-2xl md:text-3xl font-bold">10+</p>
+                        <p className="text-xs text-gray-400 uppercase">
+                            Major Modules
+                        </p>
                     </div>
-                    <p className="mt-4 text-xs text-black/50 dark:text-white/50">
-                        *Cumulative across personal + client projects.
-                    </p>
-                </GlassCard>
+                    <div>
+                        <p className="text-2xl md:text-3xl font-bold">∞</p>
+                        <p className="text-xs text-gray-400 uppercase">
+                            Curiosity
+                        </p>
+                    </div>
+                </motion.div>
             </div>
-        </div>
-    </Section>
-);
+        </section>
+    );
+}
 
 const About = () => (
     <Section id="about" className="pt-10 md:pt-20">
@@ -556,7 +604,7 @@ const Contact = () => (
                         href={CONTACT.phone}
                         className="flex items-center gap-2 hover:underline"
                     >
-                        <Phone className="w-4 h-4" /> +8801XXXXXXXXX
+                        <Phone className="w-4 h-4" /> +880 1700 940689
                     </a>
                     <a
                         href={CONTACT.github}
