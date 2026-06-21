@@ -1,4 +1,3 @@
-import { GlassCard, Section } from "@/app/page";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import {
@@ -17,6 +16,8 @@ import {
     SiTypescript,
     SiVercel,
 } from "react-icons/si";
+import { GlassCard } from "./GlassCard";
+import { Section } from "./Section";
 
 const SKILLS = [
     // Frontend

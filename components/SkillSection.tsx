@@ -1,4 +1,3 @@
-import { GlassCard, Section } from "@/app/page";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import {
@@ -24,6 +23,8 @@ import {
     SiVercel,
 } from "react-icons/si";
 import { TbBrandGolang, TbDatabase } from "react-icons/tb";
+import { GlassCard } from "./GlassCard";
+import { Section } from "./Section";
 
 export const SKILLS = [
     // Frontend

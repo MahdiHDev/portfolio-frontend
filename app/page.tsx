@@ -1,5 +1,7 @@
 "use client";
 
+import { GlassCard } from "@/components/GlassCard";
+import { Section } from "@/components/Section";
 import { Skills } from "@/components/SkillSection";
 import profile from "@/public/images/profile.png";
 import { motion, useScroll, useSpring } from "framer-motion";
@@ -127,36 +129,10 @@ const CONTACT = {
     resume: "/Mahdi_Hussain_Resume.pdf", // TODO: place your resume file in public/
 };
 
-export const Section: React.FC<
-    React.PropsWithChildren<{ id?: string; className?: string }>
-> = ({ id, className, children }) => (
-    <section
-        id={id}
-        className={`relative w-full max-w-6xl mx-auto px-4 md:px-8 ${
-            className || ""
-        }`}
-    >
-        {children}
-    </section>
-);
-
 const Chip: React.FC<React.PropsWithChildren> = ({ children }) => (
     <span className="text-xs md:text-sm px-3 py-1 rounded-full border border-black/10 dark:border-white/10 backdrop-blur bg-white/50 dark:bg-white/5">
         {children}
     </span>
-);
-
-export const GlassCard: React.FC<
-    React.PropsWithChildren<{ className?: string }>
-> = ({ className, children }) => (
-    <div
-        className={`group relative overflow-hidden rounded-2xl border border-black/10 dark:border-white/10 bg-white/60 dark:bg-white/5 backdrop-blur-xl shadow-[0_10px_30px_-10px_rgba(0,0,0,0.3)] ${
-            className || ""
-        }`}
-    >
-        <div className="absolute inset-0 bg-gradient-to-br from-white/40 to-transparent dark:from-white/10" />
-        <div className="relative z-10 p-6 md:p-8">{children}</div>
-    </div>
 );
 
 const ProgressBar: React.FC<{ value: number }> = ({ value }) => (
