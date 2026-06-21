@@ -1,61 +1,57 @@
-import { motion } from "framer-motion";
 import { useState } from "react";
 import {
     SiBetterauth,
     SiBootstrap,
-    SiDocker,
     SiExpress,
-    SiFirebase,
-    SiGit,
     SiGithub,
-    SiGo,
-    SiJavascript,
-    SiMongodb,
-    SiNextdotjs,
-    SiNodedotjs,
-    SiPostgresql,
-    SiPostman,
     SiPrisma,
-    SiReact,
-    SiRedux,
-    SiTailwindcss,
-    SiTypescript,
     SiVercel,
 } from "react-icons/si";
-import { TbBrandGolang, TbDatabase } from "react-icons/tb";
 import { GlassCard } from "./GlassCard";
 import { Section } from "./Section";
+import DockerIcon from "./icons/DockerIcon";
+import FirebaseIcon from "./icons/FirebaseIcon";
+import GitIcon from "./icons/GitIcon";
+import GoLang from "./icons/GoLang";
+import JavascriptIcon from "./icons/JavascriptIcon";
+import MongoDB from "./icons/MongoDB";
+import NextJs from "./icons/NextJs";
+import NodeJs from "./icons/NodeJs";
+import PostgreSQL from "./icons/PostgreSQL";
+import PostmanIcon from "./icons/PostmanIcon";
+import ReactIcon from "./icons/ReactIcon";
+import ReduxIcon from "./icons/Redux";
+import TailwindIcon from "./icons/TailwindIcon";
+import TypescriptIcon from "./icons/TypescriptIcon";
 
 export const SKILLS = [
     // Frontend
-    { name: "JavaScript", icon: SiJavascript, category: "Frontend" },
-    { name: "TypeScript", icon: SiTypescript, category: "Frontend" },
-    { name: "React", icon: SiReact, category: "Frontend" },
-    { name: "Next.js", icon: SiNextdotjs, category: "Frontend" },
-    { name: "Redux", icon: SiRedux, category: "Frontend" },
+    { name: "Javascript", icon: JavascriptIcon, category: "All" },
+    { name: "Typescript", icon: TypescriptIcon, category: "All" },
+    { name: "React", icon: ReactIcon, category: "Frontend" },
+    { name: "Next.js", icon: NextJs, category: "Frontend" },
+    { name: "Redux", icon: ReduxIcon, category: "Frontend" },
     { name: "Bootstrap", icon: SiBootstrap, category: "Frontend" },
-    { name: "Tailwind", icon: SiTailwindcss, category: "Frontend" },
+    { name: "Tailwind", icon: TailwindIcon, category: "Frontend" },
 
     // Backend
-    { name: "Node.js", icon: SiNodedotjs, category: "Backend" },
+    { name: "Node.js", icon: NodeJs, category: "Backend" },
     { name: "Express", icon: SiExpress, category: "Backend" },
     { name: "Better Auth", icon: SiBetterauth, category: "Backend" },
-    { name: "Go", icon: SiGo, category: "Backend" },
-    { name: "Echo", icon: TbBrandGolang, category: "Backend" },
+    { name: "Go", icon: GoLang, category: "Backend" },
 
     // Database
-    { name: "MongoDB", icon: SiMongodb, category: "Database" },
-    { name: "PostgreSQL", icon: SiPostgresql, category: "Database" },
+    { name: "PostgreSQL", icon: PostgreSQL, category: "Database" },
+    { name: "MongoDB", icon: MongoDB, category: "Database" },
     { name: "Prisma", icon: SiPrisma, category: "Database" },
-    { name: "Firebase", icon: SiFirebase, category: "Database" },
-    { name: "GORM", icon: TbDatabase, category: "Database" },
+    { name: "Firebase", icon: FirebaseIcon, category: "Database" },
 
     // Tools
-    { name: "Git", icon: SiGit, category: "Tools" },
+    { name: "Git", icon: GitIcon, category: "Tools" },
     { name: "GitHub", icon: SiGithub, category: "Tools" },
-    { name: "Postman", icon: SiPostman, category: "Tools" },
+    { name: "Postman", icon: PostmanIcon, category: "Tools" },
     { name: "Vercel", icon: SiVercel, category: "Tools" },
-    { name: "Docker", icon: SiDocker, category: "Tools" },
+    { name: "Docker", icon: DockerIcon, category: "Tools" },
 ];
 
 export const Skills = () => {
@@ -89,29 +85,19 @@ export const Skills = () => {
             </div>
 
             {/* Skills Grid */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5 mt-8">
-                {filteredSkills.map((skill, i) => {
-                    const Icon = skill.icon;
+            <GlassCard className="transition mt-6">
+                <div className="flex gap-4 sm:gap-8 flex-wrap max-w-4xl justify-center mx-auto">
+                    {filteredSkills.map((skill, i) => {
+                        const Icon = skill.icon;
 
-                    return (
-                        <motion.div
-                            key={skill.name}
-                            initial={{ opacity: 0, y: 15 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ delay: i * 0.03 }}
-                            viewport={{ once: true }}
-                            className="group"
-                        >
-                            <GlassCard className="h-full hover:-translate-y-2 transition">
-                                <div className="flex flex-col items-center justify-center gap-4">
-                                    <Icon className="text-5xl group-hover:scale-110 transition" />
-                                    <p className="font-medium">{skill.name}</p>
-                                </div>
-                            </GlassCard>
-                        </motion.div>
-                    );
-                })}
-            </div>
+                        return (
+                            <div>
+                                <Icon className="size-10 sm:size-12" />
+                            </div>
+                        );
+                    })}
+                </div>
+            </GlassCard>
         </Section>
     );
 };
