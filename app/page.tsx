@@ -1,5 +1,7 @@
 "use client";
 
+import { Skills } from "@/components/SkillSection";
+import profile from "@/public/images/profile.png";
 import { motion, useScroll, useSpring } from "framer-motion";
 import {
     Box,
@@ -17,10 +19,13 @@ import {
     Phone,
     Rocket,
     Star,
+    SunIcon,
     Wrench,
 } from "lucide-react";
+import { useTheme } from "next-themes";
 import Image from "next/image";
 import React, { useEffect, useMemo, useState } from "react";
+import { HiMoon } from "react-icons/hi2";
 
 /**
  * Mahdi Hussain — Modern Portfolio Single-File React Page
@@ -45,19 +50,6 @@ const TAGS = [
     "Framer Motion",
     "JWT/Auth",
     "REST APIs",
-];
-
-const SKILLS: { name: string; level: number }[] = [
-    { name: "HTML / CSS", level: 95 },
-    { name: "JavaScript (ESNext)", level: 92 },
-    { name: "TypeScript", level: 85 },
-    { name: "React", level: 92 },
-    { name: "Next.js", level: 88 },
-    { name: "Redux / RTK Query", level: 90 },
-    { name: "Node.js", level: 86 },
-    { name: "Express", level: 84 },
-    { name: "MongoDB", level: 88 },
-    { name: "Tailwind CSS", level: 95 },
 ];
 
 const PROJECTS: {
@@ -135,7 +127,7 @@ const CONTACT = {
     resume: "/Mahdi_Hussain_Resume.pdf", // TODO: place your resume file in public/
 };
 
-const Section: React.FC<
+export const Section: React.FC<
     React.PropsWithChildren<{ id?: string; className?: string }>
 > = ({ id, className, children }) => (
     <section
@@ -154,10 +146,9 @@ const Chip: React.FC<React.PropsWithChildren> = ({ children }) => (
     </span>
 );
 
-const GlassCard: React.FC<React.PropsWithChildren<{ className?: string }>> = ({
-    className,
-    children,
-}) => (
+export const GlassCard: React.FC<
+    React.PropsWithChildren<{ className?: string }>
+> = ({ className, children }) => (
     <div
         className={`group relative overflow-hidden rounded-2xl border border-black/10 dark:border-white/10 bg-white/60 dark:bg-white/5 backdrop-blur-xl shadow-[0_10px_30px_-10px_rgba(0,0,0,0.3)] ${
             className || ""
@@ -177,15 +168,15 @@ const ProgressBar: React.FC<{ value: number }> = ({ value }) => (
     </div>
 );
 
-const useTheme = () => {
-    const [dark, setDark] = useState(true);
-    useEffect(() => {
-        const root = document.documentElement;
-        if (dark) root.classList.add("dark");
-        else root.classList.remove("dark");
-    }, [dark]);
-    return { dark, setDark };
-};
+// const useTheme = () => {
+//     const [dark, setDark] = useState(true);
+//     useEffect(() => {
+//         const root = document.documentElement;
+//         if (dark) root.classList.add("dark");
+//         else root.classList.remove("dark");
+//     }, [dark]);
+//     return { dark, setDark };
+// };
 
 const AnimatedGradient = () => (
     <div className="pointer-events-none fixed inset-0 -z-10">
@@ -284,7 +275,7 @@ const Nav = () => {
 
 function Hero() {
     return (
-        <section className="min-h-screen flex flex-col md:flex-row items-center justify-center gap-12 px-6 md:px-16 text-white container mx-auto py-12 md:py-20">
+        <section className="min-h-screen flex flex-col md:flex-row items-center justify-center gap-12 px-6 md:px-16 dark:text-white container mx-auto py-12 md:py-20 max-w-6xl">
             {/* Profile Image with Glow */}
             <motion.div
                 initial={{ opacity: 0, y: 40 }}
@@ -292,9 +283,9 @@ function Hero() {
                 transition={{ duration: 0.8 }}
                 className="relative flex-shrink-0"
             >
-                <div className="relative w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden shadow-2xl border-4 border-white">
+                <div className="relative w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden shadow-2xl border-4 dark:border-white border-gray-300">
                     <Image
-                        src="/images/mahdi.jpg"
+                        src={profile}
                         alt="Mahdi Hussain"
                         fill
                         className="object-cover"
@@ -312,10 +303,13 @@ function Hero() {
                     transition={{ duration: 0.6 }}
                     className="text-4xl md:text-6xl font-extrabold leading-tight"
                 >
-                    Hi, I’m <span className="text-sky-400">Mahdi Hussain</span>{" "}
+                    Hi, I’m{" "}
+                    <span className="dark:text-sky-400 text-sky-700">
+                        Mahdi Hussain
+                    </span>{" "}
                     <br />I build{" "}
-                    <span className="bg-gradient-to-r from-indigo-500 via-sky-400 to-amber-400 bg-clip-text text-transparent">
-                        MERN Stack
+                    <span className="bg-gradient-to-r  dark:from-indigo-500  dark:via-sky-400 dark:to-amber-400 from-indigo-900 via-sky-800 to-amber-700 bg-clip-text text-transparent">
+                        Full Stack
                     </span>{" "}
                     apps 🚀
                 </motion.h1>
@@ -324,13 +318,16 @@ function Hero() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.1 }}
-                    className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto md:mx-0"
+                    className="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto md:mx-0"
                 >
                     A passionate{" "}
-                    <span className="font-semibold">MERN Stack Developer</span>{" "}
+                    <span className="font-semibold">Full Stack Developer</span>{" "}
                     focused on modern UX, resilient APIs, and clean, scalable
                     state management with{" "}
-                    <span className="text-sky-400">Redux & RTK Query</span>.
+                    <span className="dark:text-sky-400 text-sky-700">
+                        Redux & RTK Query
+                    </span>
+                    .
                 </motion.p>
 
                 {/* Buttons */}
@@ -360,7 +357,7 @@ function Hero() {
                     </a>
                 </motion.div>
 
-                {/* Tags */}
+                {/* Tags
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -370,19 +367,19 @@ function Hero() {
                     {TAGS.map((tag) => (
                         <span
                             key={tag}
-                            className="px-3 py-1 rounded-full bg-white/10 border border-white/20 text-sm text-gray-200"
+                            className="px-3 py-1 rounded-full bg-gray-100 dark:bg-white/10 border border-black/10 dark:border-white/20 text-sm dark:text-gray-200 text-gray-500"
                         >
                             {tag}
                         </span>
                     ))}
-                </motion.div>
+                </motion.div> */}
 
                 {/* Stats Card */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.4 }}
-                    className="mt-8 bg-white/5 backdrop-blur-md rounded-2xl p-4 md:p-6 grid grid-cols-3 gap-6 text-center shadow-xl w-full max-w-3xl"
+                    className="mt-8 bg-white border border-slate-200 dark:border-white/10 dark:bg-white/5 backdrop-blur-md rounded-2xl p-4 md:p-6 grid grid-cols-3 gap-6 text-center shadow-xl w-full max-w-3xl"
                 >
                     <div>
                         <p className="text-2xl md:text-3xl font-bold">5+</p>
@@ -490,33 +487,33 @@ const About = () => (
     </Section>
 );
 
-const Skills = () => (
-    <Section id="skills" className="pt-10 md:pt-20">
-        <h2 className="text-2xl md:text-3xl font-semibold tracking-tight">
-            Skills
-        </h2>
-        <div className="mt-6 grid md:grid-cols-2 gap-6">
-            {SKILLS.map((s, i) => (
-                <motion.div
-                    key={s.name}
-                    initial={{ opacity: 0, y: 8 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, amount: 0.3 }}
-                    transition={{ duration: 0.4, delay: i * 0.03 }}
-                    className=""
-                >
-                    <div className="flex items-center justify-between mb-2">
-                        <p className="font-medium">{s.name}</p>
-                        <p className="text-sm text-black/60 dark:text-white/60">
-                            {s.level}%
-                        </p>
-                    </div>
-                    <ProgressBar value={s.level} />
-                </motion.div>
-            ))}
-        </div>
-    </Section>
-);
+// const Skills = () => (
+//     <Section id="skills" className="pt-10 md:pt-20">
+//         <h2 className="text-2xl md:text-3xl font-semibold tracking-tight">
+//             Skills
+//         </h2>
+//         <div className="mt-6 grid md:grid-cols-2 gap-6">
+//             {SKILLS.map((s, i) => (
+//                 <motion.div
+//                     key={s.name}
+//                     initial={{ opacity: 0, y: 8 }}
+//                     whileInView={{ opacity: 1, y: 0 }}
+//                     viewport={{ once: true, amount: 0.3 }}
+//                     transition={{ duration: 0.4, delay: i * 0.03 }}
+//                     className=""
+//                 >
+//                     <div className="flex items-center justify-between mb-2">
+//                         <p className="font-medium">{s.name}</p>
+//                         <p className="text-sm text-black/60 dark:text-white/60">
+//                             {s.level}%
+//                         </p>
+//                     </div>
+//                     <ProgressBar value={s.level} />
+//                 </motion.div>
+//             ))}
+//         </div>
+//     </Section>
+// );
 
 const Projects = () => (
     <Section id="projects" className="pt-10 md:pt-20">
@@ -665,8 +662,15 @@ const Contact = () => (
 );
 
 export default function MahdiPortfolio() {
-    const { dark, setDark } = useTheme();
+    const { theme, setTheme } = useTheme();
     const year = useMemo(() => new Date().getFullYear(), []);
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
+    if (!mounted) return null;
 
     return (
         <main className="min-h-[100svh] font-[ui-sans-serif,system-ui,Segoe UI,Roboto,Inter,Helvetica,Arial] text-black dark:text-white bg-[radial-gradient(1200px_800px_at_20%_-10%,rgba(99,102,241,0.15),transparent),radial-gradient(1000px_700px_at_100%_10%,rgba(56,189,248,0.15),transparent)] dark:bg-[radial-gradient(1200px_800px_at_20%_-10%,rgba(99,102,241,0.06),transparent),radial-gradient(1000px_700px_at_100%_10%,rgba(56,189,248,0.06),transparent)] selection:bg-amber-200 selection:text-black">
@@ -675,11 +679,15 @@ export default function MahdiPortfolio() {
 
             {/* Theme toggle */}
             <button
-                onClick={() => setDark(!dark)}
-                className="fixed bottom-4 right-4 z-40 px-3 py-2 rounded-xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 backdrop-blur shadow-lg"
+                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                className="fixed bottom-4 right-4 z-40 px-3 py-3 rounded-xl border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 backdrop-blur shadow-lg"
                 aria-label="Toggle theme"
             >
-                {dark ? "☾" : "☀"}
+                {theme === "dark" ? (
+                    <HiMoon className="size-5" />
+                ) : (
+                    <SunIcon className="size-5" />
+                )}
             </button>
 
             <Nav />
@@ -694,7 +702,7 @@ export default function MahdiPortfolio() {
                     <p className="text-sm text-black/60 dark:text-white/60">
                         © {year} Mahdi Hussain. All rights reserved.
                     </p>
-                    <div className="flex items-center gap-2">
+                    <div className=" items-center gap-2 hidden sm:flex">
                         {TAGS.slice(0, 5).map((t) => (
                             <Chip key={t}>{t}</Chip>
                         ))}
