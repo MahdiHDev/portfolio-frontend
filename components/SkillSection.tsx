@@ -105,7 +105,7 @@ export const Skills = () => {
                         className={`px-4 py-2 rounded-full border transition ${
                             activeFilter === filter
                                 ? "bg-sky-500 text-white border-sky-500"
-                                : "border-white/10 hover:bg-white/10"
+                                : "border-black/10 dark:border-white/10 hover:bg-white/10"
                         }`}
                     >
                         {filter}
